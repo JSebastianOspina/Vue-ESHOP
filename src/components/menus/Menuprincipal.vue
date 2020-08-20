@@ -4,11 +4,11 @@
       <v-row justify="center">
         <v-col cols="12">
           <v-row>
-            <v-col class="d-flex justify-start">
+            <v-col class="d-flex justify-center justify-sm-start">
               <h1 style="text-align:center" class="ml-1">Settimana</h1>
             </v-col>
 
-            <v-col cols="5" class="d-flex justify-end align-center">
+            <v-col cols="12" sm="4" class="d-flex justify-md-end justify-center align-center">
               <v-btn outlined class="mr-2" @click="openSearch()">
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>

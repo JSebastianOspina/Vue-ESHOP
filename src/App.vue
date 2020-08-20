@@ -4,23 +4,42 @@
       <menuPrincipal />
 
       <router-view />
+     
+        <CapturarEmail :dialog="dialog" @cerrar-dialogo="closeSearch()" />
+
     </div>
   </v-app>
 </template>
 
 <script>
 import menuPrincipal from "./components/menus/Menuprincipal";
+import CapturarEmail from "./components/modales/CapturarEmail";
 
 export default {
   name: "App",
 
   components: {
     menuPrincipal,
+    CapturarEmail
+  },
+  mounted() {
+    if(!localStorage.getItem("ingresoMail") == "true"){
+      this.dialog = false;
+    }
   },
 
   data: () => ({
+    dialog : true
     //
   }),
+  methods: {
+    ingresoEmail: function(){
+      localStorage.setItem("ingresoMail","true");
+    },
+    closeSearch: function(){
+      this.dialog = false;
+    }
+  },
 };
 </script>
 
