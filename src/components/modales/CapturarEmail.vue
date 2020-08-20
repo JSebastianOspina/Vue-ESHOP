@@ -5,6 +5,9 @@
         <v-card>
           <v-card-text>
             <v-container>
+              <v-img src="https://i.ibb.co/gd00CMn/112-F5-A3-D-76-F0-44-C4-98-A7-E1-F16-C090-EAF.png" height="120" contain class="mb-2">
+                
+              </v-img>
               <p class="text-h4 center" style="text-align:center;margin-top:5px">Bienvenido</p>
               <h3>Para poder ingresar, debes diligenciar tu correo electrónico</h3>
 
