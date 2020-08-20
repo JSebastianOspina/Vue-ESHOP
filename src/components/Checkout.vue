@@ -35,7 +35,7 @@ export default {
       }
   },
   mounted() {
-      if(this.$store.state.carrito2.length <=0){
+      if(this.$store.state.carrito.length == 0){
           this.$router.push('/')
       }
   },
