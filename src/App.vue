@@ -4,9 +4,8 @@
       <menuPrincipal />
 
       <router-view />
-     
-        <CapturarEmail :dialog="dialog" @cerrar-dialogo="closeSearch()" />
 
+      <CapturarEmail :dialog="dialog" @cerrar-dialogo="ingresoEmail()" />
     </div>
   </v-app>
 </template>
@@ -20,31 +19,32 @@ export default {
 
   components: {
     menuPrincipal,
-    CapturarEmail
+    CapturarEmail,
   },
   mounted() {
-    if(!localStorage.getItem("ingresoMail") == "true"){
+    if (localStorage.getItem("ingresoMail") == "true") {
       this.dialog = false;
+    } else {
+      this.dialog = true;
     }
   },
 
   data: () => ({
-    dialog : true
+    dialog: false,
     //
   }),
   methods: {
-    ingresoEmail: function(){
-      localStorage.setItem("ingresoMail","true");
-    },
-    closeSearch: function(){
+    ingresoEmail: function () {
+      localStorage.setItem("ingresoMail", "true");
       this.dialog = false;
-    }
+    },
+    closeSearch: function () {},
   },
 };
 </script>
 
 <style>
-.appsita{
+.appsita {
   background-color: #f7fbfc;
 }
 .appsitas {
