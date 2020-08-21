@@ -8,11 +8,11 @@
           <v-card
             class="mt-6 mx-auto"
             
-            :to="'negocio/'+datos.url"
+            :to="'negocio/'+datos.slug"
             max-width="400"
             elevation="10"
           >
-            <v-img class="white--text align-end" height="200px" :src="datos.img">
+            <v-img class="white--text align-end" height="200px" :src="'http://admin.settimanaferia.com/storage/'+datos.imagen">
               <h2
                 class="text-center mb-3 text-h4 font-weight-black"
                 style="text-shadow: 1px 2px 2px black; "
@@ -25,75 +25,26 @@
   </div>
 </template>
 <script>
+
 export default {
   name: "Negocios",
+  mounted() {
+    this.getStores();
+  },
+  methods: {
+    getStores: function(){
+    let local = this;
+    axios.get(this.url+'/store').then(function(response){
+      console.log(response.data)
+      local.data = response.data;
+    });
+    }
+  },
   data: () => ({
-    data: [
-      {
-        id: "1",
-        nombre: "Pepito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/lookbook-mobile_400x.jpg",
-        descripcion: "Descripción pepito",
-        url: "about",
-      },
-      {
-        id: "1",
-        nombre: "Pepito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/lookbook-mobile_400x.jpg",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Pepito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/lookbook-mobile_400x.jpg",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Juanito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/clothing_394x.jpg?v=1530846922",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Pepito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/lookbook-mobile_400x.jpg",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Juanito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/clothing_394x.jpg?v=1530846922",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Pepito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/lookbook-mobile_400x.jpg",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-      {
-        id: "1",
-        nombre: "Juanito Store",
-        img:
-          "https://cdn.shopify.com/s/files/1/0883/0062/files/clothing_394x.jpg?v=1530846922",
-        descripcion: "Descripción pepito",
-        url: "pepito",
-      },
-    ],
+    url : 'http://admin.settimanaferia.com/api',
+
+    data : [],
+    
   }),
 };
 </script>
