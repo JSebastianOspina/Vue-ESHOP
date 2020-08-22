@@ -41,7 +41,7 @@ export default {
     }
   },
   data: () => ({
-    url : 'http://admin.settimanaferia.com/api',
+    url : 'https://admin.settimanaferia.com/api',
 
     data : [],
     
