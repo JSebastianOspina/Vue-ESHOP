@@ -12,7 +12,7 @@
               <h3>Para poder ingresar, debes diligenciar tu correo electrónico</h3>
 
               <v-text-field type="email" label="Correo electrónico" v-model="emailUsuario" required></v-text-field>
-              <v-btn color="blue darken-1" depressed block @click="cerrar()">Ingresar</v-btn>
+              <v-btn color="#bf383d" depressed block @click="cerrar()">Ingresar</v-btn>
             </v-container>
           </v-card-text>
         </v-card>

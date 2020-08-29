@@ -3,13 +3,14 @@
     <v-container>
       <v-row justify="end">
         <v-col class="d-flex justify-end">
-          <v-btn outlined color="grey" @click="$router.go(-1)">Volver a las tiendas</v-btn>
+          <v-btn outlined color="#eb8f8f" @click="$router.go(-1)">Volver a las tiendas</v-btn>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="6" md="4" v-for="(datos,key) in data" :key="key">
           <v-card :elevation="valor(datos.oferta)" :to="productoUrl(datos.id)" color="#F3F3F3">
-            <v-img :src="imagenDestacada(datos.imagenes)" :height="altura()" contain></v-img>
+            <v-divider></v-divider>
+            <v-img :src="imagenDestacada(datos.imagenes)" aspect-ratio="1" class="mt-1"></v-img>
             <p class="text-h6 text-center mt-1 font-weight-light">{{datos.name}}</p>
             <p class="text-body-1 text-center mt-1 font-weight-light">
               Desde:

@@ -1,32 +1,41 @@
 <template>
-  <div>
+  <div class="menu">
     <v-container>
-      <v-row justify="center">
+      <v-row justify="center" no-gutters>
         <v-col cols="12">
           <v-row>
-            <v-col class="d-flex justify-center justify-sm-start">
-              <h1 style="text-align:center" class="ml-1">Settimana</h1>
+            <v-col class="d-none d-sm-flex justify-center justify-sm-start">
+              <h1
+                style="text-align:center"
+                class="ml-1 text-subtitle-1 text-sm-h4 font-weight-bold text-uppercase"
+              >Settimana</h1>
             </v-col>
 
-            <v-col cols="12" sm="4" class="d-flex justify-md-end justify-center align-center">
-              <v-btn outlined class="mr-2" @click="openSearch()">
-                <v-icon>mdi-magnify</v-icon>
+            <v-col cols="12" sm="4" class="d-flex justify-md-end justify-space-around align-center">
+              <v-btn text class="mr-2" @click="openSearch()">
+                <v-icon color="black">mdi-magnify</v-icon>
               </v-btn>
 
-              <v-btn outlined class="mr-2" :to="'/carrito'">
-                <v-icon>mdi-cart</v-icon>
+              <v-btn text class="mr-2" :to="'/carrito'">
+                <v-icon color="black">mdi-cart</v-icon>
                 {{darCantidadItems}}
               </v-btn>
-              <v-btn outlined>
-                <v-icon>mdi-account</v-icon>
+              <v-btn text>
+                <v-icon color="black">mdi-account</v-icon>
               </v-btn>
+            
             </v-col>
+              <v-col cols="12" class=" d-sm-none justify-center justify-sm-start" style="padding:1px">
+                <h1
+                  style="text-align:center"
+                  class="ml-1 text-subtitle-1 text-sm-h4 font-weight-bold text-uppercase"
+                >Settimana</h1>
+              </v-col>
           </v-row>
-         
         </v-col>
       </v-row>
     </v-container>
-     
+
     <BusquedaModal :dialog="dialog" @cerrar-dialogo="closeSearch()" />
   </div>
 </template>
@@ -44,8 +53,7 @@ export default {
   computed: {
     // a computed getter
     darCantidadItems: function () {
-      if (this.$store.state.carrito2.length> 0) {
-        
+      if (this.$store.state.carrito2.length > 0) {
         return this.$store.state.carrito2.length;
       } else {
         return this.$store.state.carrito.length;
@@ -62,3 +70,8 @@ export default {
   },
 };
 </script>
+<style>
+.menu {
+  background-color: #bf383d;
+}
+</style>

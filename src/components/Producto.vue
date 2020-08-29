@@ -3,16 +3,16 @@
   <v-container fluid>
     <v-row justify="end">
       <v-col cols="2" class="d-flex justify-end">
-        <v-btn outlined color="grey" @click="$router.go(-1)">Ver mas productos</v-btn>
+        <v-btn outlined color="#eb8f8f" @click="$router.go(-1)">Ver mas productos</v-btn>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="12" md="6">
         <v-carousel cycle :height="altura()" hide-delimiter-background show-arrows-on-hover>
           <v-carousel-item
-            v-for="(item,i) in items"
+            v-for="(item,i) in imagenes"
             :key="i"
-            :src="item.src"
+            :src="item"
             cycle
             hide-delimiter-background
             show-arrows-on-hover
@@ -22,14 +22,22 @@
       <v-col cols="12" md="6">
         <v-card color="#F3F3F3">
           <v-card-text>
-            <p class="text-h5 font-weight-light my-2 black--text">Chaqueta de cuero negra</p>
-            <p class="text-h6 font-weight-medium my-2" style="color: #449A9A">${{items[0].precio}}</p>
+            <p class="text-h5 font-weight-light my-2 black--text">{{articulo.nombre}}</p>
+            <p class="text-h6 font-weight-medium my-2" style="color: #bf383d">${{articulo.precio}}</p>
             <v-divider></v-divider>
+
             <p class="text-uppercase mt-2">Color: {{color}}</p>
-            <v-select color="#449A9A" v-model="color" :items="items[0].color" label="COLOR"></v-select>
+           
+          
+            <v-row justify="center">
+              <v-col cols="3" v-for="(item,i) in stock" :key="i" @click="selectColor(item)">
+                <v-btn outlined>{{item.color}}</v-btn>
+              </v-col>
+            </v-row>
+
             <p class="text-uppercase mt-2">Talla: {{talla}}</p>
             <v-row justify="center">
-              <v-col cols="3" v-for="(item,i) in items[0].tallas" :key="i" @click="talla = item">
+              <v-col cols="3" v-for="(item,i) in size" :key="i" @click="talla = item">
                 <v-btn outlined>{{item}}</v-btn>
               </v-col>
             </v-row>
@@ -47,13 +55,13 @@
                 <v-btn
                   outlined
                   block
-                  color="#449A9A"
+                  color="#bf383d"
                   class="py-6"
-                  @click="incrementar($route.params.negocio,$route.params.producto,color,talla,cantidad,items[0].src,items[0].precio)"
+                  @click="incrementar($route.params.negocio,$route.params.producto,color,talla,cantidad,articulo.src,articulo.precio)"
                 >AÑADIR AL CARRITO</v-btn>
               </v-col>
               <v-col cols="12">
-                <v-btn depressed block color="#449A9A" class="py-6" to="/carrito">Ir al carrito</v-btn>
+                <v-btn depressed block color="#bf383d" class="py-6" to="/carrito">Ir al carrito</v-btn>
               </v-col>
               <v-alert
                 v-if="alerta"
@@ -64,7 +72,7 @@
             </v-row>
             <p class="text-uppercase mt-2">Descripcion</p>
             <div class="mx-2">
-              <p class="text-uppercase mt-2 text-justify">{{items[0].descripcion}}</p>
+              <p class="text-uppercase mt-2 text-justify">{{articulo.descripcion}}</p>
             </div>
           </v-card-text>
         </v-card>
@@ -76,9 +84,42 @@
 export default {
   name: "Producto",
   mounted() {
-    console.log(this.$vuetify.breakpoint);
+    this.getProduct();
   },
   methods: {
+    getProduct: function () {
+      let productId = this.$route.params.producto;
+      let url = "https://admin.settimanaferia.com/api";
+      let local = this;
+      axios.get(url + "/product/" + productId).then(function (response) {
+        console.log(response);
+        let imagenes = [];
+        let aux = response.data[0].imagenes;
+        let anotheraux = 0;
+        aux = aux.split(",");
+        console.log(aux);
+        aux.forEach((element) => {
+          if (!anotheraux == 0) {
+            imagenes.push("http://admin.settimanaferia.com/storage/" + element);
+          }
+          anotheraux = 1;
+        });
+        local.imagenes = imagenes;
+        console.log(imagenes);
+        local.articulo = {
+          color: ["rojo", "amarillo"],
+          tallas: ["M", "L"],
+          descripcion: response.data[0].description,
+          precio: response.data[0].price,
+          nombre: response.data[0].name,
+          id: response.data[0].id,
+        };
+        console.log(local.articulo);
+
+        local.stock = response.data[1];
+        console.log(local.stock);
+      });
+    },
     altura: function () {
       if (this.$vuetify.breakpoint.smAndUp) {
         return "100vh";
@@ -173,6 +214,10 @@ export default {
       console.log(definitivo);
       this.$store.commit("guardarCarrito", definitivo);
     },
+    selectColor: function (item) {
+      this.size = item.size;
+      this.color = item.color;
+    },
   },
   data() {
     return {
@@ -180,26 +225,11 @@ export default {
       color: "Seleccione un color",
       talla: "Por favor, seleccione una talla",
       cantidad: 1,
-
-      items: [
-        {
-          src:
-            "https://fenixprint.co/6159-large_default/camiseta-estampada-hombre-the-beatles-lonely-hearts.jpg",
-          color: ["Rojo", "Blanco"],
-          tallas: ["S", "M", "L"],
-          descripcion:
-            "You don’t need a lot to do great work. Talented people joined by a common compassion or cause find innovative ways to multiply scarce resources into something bigger than life.",
-          precio: 365,
-        },
-        {
-          src:
-            "https://cdn.shopify.com/s/files/1/0883/0062/products/do-alot-gray-2000_1200x_78abb7bb-0106-493f-bf41-e5dd9153b9df_295x.jpg",
-        },
-        {
-          src:
-            "https://cdn.shopify.com/s/files/1/0883/0062/products/do-alot-navy-new-2_2048x2048_43751919-b917-49d1-a594-58af029607eb_295x.jpg",
-        },
-      ],
+      imagenes: [],
+      articulo: {},
+      stock: [],
+      sera: 0,
+      size: [],
     };
   },
 };
