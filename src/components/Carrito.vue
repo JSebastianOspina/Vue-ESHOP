@@ -17,7 +17,7 @@
               <v-col>
                 <p
                   class="text-subtitle-1 text-md-h4 font-weight-light my-2 black--text"
-                >Chaqueta de cuero negra</p>
+                >{{producto.nombre}}</p>
                 <span
                   class="text-h6 font-weight-medium my-2"
                   style="color: #449A9A"
@@ -62,13 +62,13 @@
           <v-btn
             outlined
             block
-            color="#449A9A"
+            color="#BF383D"
             class="py-7"
             @click="$router.go(-1)"
           >Volver al catalogo</v-btn>
         </v-col>
         <v-col cols="12" md="6" class="d-flex jusify-center">
-          <v-btn solid block color="#449A9A" class="py-7" to="/checkout">Proceder a el pago</v-btn>
+          <v-btn solid block color="#BF383D" class="py-7" to="/checkout">Proceder a el pago</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -136,6 +136,7 @@ export default {
               img: sub.img,
               total: contador,
               precio: sub.precio,
+              nombre : sub.nombre
             };
           } else {
             console.log("nope");

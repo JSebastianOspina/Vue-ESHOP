@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     carrito: [],
     carrito2: [],
-    aux: 0
+    aux: 0,
+    url: "https://admin.settimanaferia.com/api",
 
 
   },
@@ -45,7 +46,7 @@ export default new Vuex.Store({
         }
       });
 
-      console.log(state.carrito2);
+      console.log(state.carrito);
     },
 
     addShopping2(state, {
@@ -55,7 +56,8 @@ export default new Vuex.Store({
       talla,
       cantidad,
       img,
-      precio
+      precio,
+      nombre
     }) {
 
       let objeto = {
@@ -67,6 +69,7 @@ export default new Vuex.Store({
         'talla': talla,
         'img': img,
         'precio':precio,
+        'nombre' : nombre
       };
       state.carrito2.push(objeto);
       console.log(state.carrito2);

@@ -57,18 +57,13 @@
                   block
                   color="#bf383d"
                   class="py-6"
-                  @click="incrementar($route.params.negocio,$route.params.producto,color,talla,cantidad,articulo.src,articulo.precio)"
+                  @click="incrementar($route.params.negocio,$route.params.producto,color,talla,cantidad,imagenes[0],articulo.precio,articulo.nombre)"
                 >AÑADIR AL CARRITO</v-btn>
               </v-col>
               <v-col cols="12">
                 <v-btn depressed block color="#bf383d" class="py-6" to="/carrito">Ir al carrito</v-btn>
               </v-col>
-              <v-alert
-                v-if="alerta"
-                type="success"
-                dismissible
-                transition="scale-transition"
-              >Se ha añadido el artículo a el carrito</v-alert>
+             
             </v-row>
             <p class="text-uppercase mt-2">Descripcion</p>
             <div class="mx-2">
@@ -134,7 +129,8 @@ export default {
       talla,
       cantidad,
       img,
-      precio
+      precio,
+      nombre
     ) {
       if (
         color != "Seleccione un color" &&
@@ -148,72 +144,13 @@ export default {
           cantidad,
           img,
           precio,
+          nombre
         });
-        this.alerta = true;
       } else {
         alert("Selecciona");
       }
     },
-    comprar: function (tiendaId, itemId, color, talla, cantidad, img) {
-      if (
-        color != "Seleccione un color" &&
-        talla != "Por favor, seleccione una talla"
-      ) {
-        this.$store.commit("addShopping2", {
-          tiendaId,
-          itemId,
-          color,
-          talla,
-          cantidad,
-          img,
-        });
-        this.$router.push({ name: "carrito" });
-      } else {
-        alert("Selecciona");
-      }
-    },
-    prepararCarrito: function () {
-      console.log("sientre");
-      let filtrado = [];
-      let lista = [];
-      this.$store.state.carrito2.forEach((element) => {
-        if (!lista.includes(element.serial)) {
-          lista.push(element.serial);
-        }
-      });
-      //Obtenemos los valores de el serial
-      console.log(lista);
-      let definitivo = [];
-      lista.forEach((element) => {
-        let objeto = {};
-        let contador = 0;
-
-        this.$store.state.carrito2.forEach((sub) => {
-          if (sub.serial == element) {
-            console.log(element);
-            contador = contador + sub.cantidad;
-            objeto = {
-              tienda: sub.tienda,
-              id: sub.id,
-              serial:
-                sub.tienda + "-" + sub.id + "-" + sub.talla + "-" + sub.color,
-              cantidad: sub.cantidad,
-              color: sub.color,
-              talla: sub.talla,
-              img: sub.img,
-              total: contador,
-              precio: sub.precio,
-            };
-          } else {
-            console.log("nope");
-          }
-        });
-        definitivo.push(objeto);
-      });
-      console.log("asiquede");
-      console.log(definitivo);
-      this.$store.commit("guardarCarrito", definitivo);
-    },
+      
     selectColor: function (item) {
       this.size = item.size;
       this.color = item.color;
