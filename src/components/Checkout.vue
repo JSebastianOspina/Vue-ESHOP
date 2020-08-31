@@ -151,7 +151,7 @@ export default {
       this.total = aux;
     },
     payNow() {
-      if (this.$refs.form.validate() || 1==1) {
+      if (this.$refs.form.validate() || 1 == 1) {
         if (this.metodoPago == "Efectivo") {
           console.log("epalarepa");
           let url = this.$store.state.url;
@@ -168,9 +168,13 @@ export default {
             metodoPago: this.metodoPago,
             total: this.total,
           };
-          axios.post(url + "/requestPaymentEfectivo", data).then(function(response){
-            console.log(response);
-          })
+          let peticion = [this.$store.state.carrito,data];
+
+          axios
+            .post(url + "/requestPaymentEfectivo", peticion)
+            .then(function (response) {
+              console.log(response);
+            });
         }
       }
     },
