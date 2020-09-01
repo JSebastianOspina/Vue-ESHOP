@@ -152,7 +152,7 @@ export default {
     },
     payNow() {
       if (this.$refs.form.validate() || 1 == 1) {
-        if (this.metodoPago == "Efectivo") {
+        if (1) {
           console.log("epalarepa");
           let url = this.$store.state.url;
           console.log(url);
@@ -168,13 +168,32 @@ export default {
             metodoPago: this.metodoPago,
             total: this.total,
           };
-          let peticion = [this.$store.state.carrito,data];
 
-          axios
+          let peticion = [];
+
+          if (this.metodoPago == "Mercado pago") {
+            peticion = [this.$store.state.carrito, data];
+
+             axios
+            .post(url + "/requestPaymentMercadoPago", peticion)
+            .then(function (response) {
+              console.log(response);
+              window.location.replace(response.data);
+            }); // Guardamos los datos de proporcionó
+
+
+
+
+          } else{
+            peticion = [this.$store.state.carrito, data];
+             axios
             .post(url + "/requestPaymentEfectivo", peticion)
             .then(function (response) {
               console.log(response);
             });
+
+          }
+         
         }
       }
     },

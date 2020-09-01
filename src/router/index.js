@@ -6,7 +6,7 @@ import Producto from '../components/Producto.vue'
 import Carrito from '../components/Carrito.vue'
 import Checkout from '../components/Checkout.vue'
 import Confirmacion from '../components/Confirmacion.vue'
-import Mercadopago from '../components/Mercadopago.vue'
+import PagoMercadoPago from '../components/PagoMercadoPago.vue'
 
 
 Vue.use(VueRouter)
@@ -44,9 +44,10 @@ Vue.use(VueRouter)
   },
   {
     path: '/Mercadopago',
-    name: 'Mercadopago',
-    component: Mercadopago
+    name: 'PagoMercadoPago',
+    component: PagoMercadoPago
   },
+ 
   
 ]
 
