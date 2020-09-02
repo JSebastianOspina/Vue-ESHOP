@@ -30,15 +30,15 @@
            
           
             <v-row justify="center" >
-              <v-col  v-for="(item,i) in stock" :key="i">
+              <v-col  v-for="(item,i) in stock" :key="i" class="d-flex justify-center">
                 <v-btn @click="selectColor(item)" outlined>{{item.color}}</v-btn>
               </v-col>
             </v-row>
 
             <p class="text-uppercase mt-2">Talla: {{talla}}</p>
             <v-row justify="center">
-              <v-col cols="3" v-for="(item,i) in size" :key="i" @click="talla = item">
-                <v-btn outlined>{{item}}</v-btn>
+              <v-col  v-for="(item,i) in size" :key="i" class="d-flex justify-center" >
+                <v-btn @click="talla = item" outlined>{{item}}</v-btn>
               </v-col>
             </v-row>
             <p class="text-uppercase mt-2">Cantidad: {{cantidad}}</p>
