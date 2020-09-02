@@ -12,10 +12,32 @@
             <v-divider></v-divider>
             <v-img :src="imagenDestacada(datos.imagenes)" aspect-ratio="1" class="mt-1"></v-img>
             <p class="text-h6 text-center mt-1 font-weight-light">{{datos.name}}</p>
-            <p class="text-body-1 text-center mt-1 font-weight-light">
+            <div
+              v-if="datos.offert == datos.price"
+              class="text-body-1 text-center mt-1 font-weight-light"
+            >
               Desde:
-              <strong>${{datos.price}}</strong>
-            </p>
+              <strong class>${{datos.price}}</strong>
+            </div>
+            <div
+              v-if="datos.offert < datos.price"
+              class="text-body-1 text-center mt-1 font-weight-light"
+            >
+              <v-row no-gutters justify="center"
+>
+                <v-col cols="12" md="5">
+                  <strong
+                    class="ml-1 red--text font-weight-bold"
+                    v-if="datos.offert < datos.price"
+                  >Oferta ${{ datos.offert}}</strong>
+                </v-col>
+                <v-col cols="12" md="5">
+                  Normal:
+                  <strong class="text-decoration-line-through">${{datos.price}}</strong>
+                </v-col>
+              </v-row>
+            </div>
+
             <div style="height:2px"></div>
           </v-card>
         </v-col>
@@ -30,19 +52,16 @@ export default {
   mounted() {
     this.getProducts();
   },
-  
-  
 
   methods: {
-
-    imagenDestacada: function (param){
-      let aux = 'https://admin.settimanaferia.com/storage/'+param.split(',',2)[1];
+    imagenDestacada: function (param) {
+      let aux =
+        "https://admin.settimanaferia.com/storage/" + param.split(",", 2)[1];
       return aux;
     },
     getProducts: function () {
       console.log(this.$route.params.negocio);
       let local = this;
-      
 
       axios
         .get(this.url + "/products/" + this.$route.params.negocio)
@@ -77,7 +96,7 @@ export default {
   data: () => ({
     url: "https://admin.settimanaferia.com/api",
 
-   data: [],
+    data: [],
   }),
 };
 </script>

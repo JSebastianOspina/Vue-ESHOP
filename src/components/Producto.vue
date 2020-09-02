@@ -105,7 +105,7 @@ export default {
           color: ["rojo", "amarillo"],
           tallas: ["M", "L"],
           descripcion: response.data[0].description,
-          precio: response.data[0].price,
+          precio: (response.data[0].price>response.data[0].offert)? response.data[0].offert : response.data[0].price,
           nombre: response.data[0].name,
           id: response.data[0].id,
         };
