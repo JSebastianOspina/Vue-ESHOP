@@ -29,9 +29,9 @@
             <p class="text-uppercase mt-2">Color: {{color}}</p>
            
           
-            <v-row justify="center">
-              <v-col cols="3" v-for="(item,i) in stock" :key="i" @click="selectColor(item)">
-                <v-btn outlined>{{item.color}}</v-btn>
+            <v-row justify="center" >
+              <v-col  v-for="(item,i) in stock" :key="i">
+                <v-btn @click="selectColor(item)" outlined>{{item.color}}</v-btn>
               </v-col>
             </v-row>
 
