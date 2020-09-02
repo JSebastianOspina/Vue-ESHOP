@@ -189,7 +189,7 @@ export default {
              axios
             .post(url + "/requestPaymentEfectivo", peticion)
             .then(function (response) {
-              console.log(response);
+              window.location.replace(response.data);
             });
 
           }
