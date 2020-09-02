@@ -95,7 +95,7 @@ export default {
         console.log(aux);
         aux.forEach((element) => {
           if (!anotheraux == 0) {
-            imagenes.push("http://admin.settimanaferia.com/storage/" + element);
+            imagenes.push("https://admin.settimanaferia.com/storage/" + element);
           }
           anotheraux = 1;
         });

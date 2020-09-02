@@ -7,7 +7,7 @@
             <v-img
               class="white--text align-end"
               aspect-ratio="1"
-              :src="'http://admin.settimanaferia.com/storage/'+datos.imagen"
+              :src="'https://admin.settimanaferia.com/storage/'+datos.imagen"
 
 
             >

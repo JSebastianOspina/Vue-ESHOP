@@ -36,7 +36,7 @@ export default {
   methods: {
 
     imagenDestacada: function (param){
-      let aux = 'http://admin.settimanaferia.com/storage/'+param.split(',',2)[1];
+      let aux = 'https://admin.settimanaferia.com/storage/'+param.split(',',2)[1];
       return aux;
     },
     getProducts: function () {
