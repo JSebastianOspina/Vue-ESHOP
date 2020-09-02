@@ -3,7 +3,7 @@
     <v-container>
       <v-row justify="end">
         <v-col class="d-flex justify-end">
-          <v-btn outlined color="#eb8f8f" @click="$router.go(-1)">Volver a las tiendas</v-btn>
+          <v-btn outlined color="#eb8f8f" :to="{ name: 'Home'}">Volver a las tiendas</v-btn>
         </v-col>
       </v-row>
       <v-row>

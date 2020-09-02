@@ -12,7 +12,7 @@
 
               <v-row>
                 <v-col cols="12">
-                  <v-text-field label="Negocio" required></v-text-field>
+                  <v-text-field label="Negocio" v-model ="busqueda" required></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -20,7 +20,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="cerrar()">Cerrar</v-btn>
-            <v-btn color="blue darken-1" text @click="cerrar()">Buscar</v-btn>
+            <v-btn color="blue darken-1" text @click="buscarNegocio()" >Buscar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -31,11 +31,22 @@
 export default {
   name: "BusquedaModal",
   props: ["dialog"],
+  
   methods: {
     cerrar: function () {
         console.log("es");
       this.$emit('cerrar-dialogo');
     },
+    buscarNegocio: function(){
+      this.$router.push({name: 'BuscarNegocio', params: { negocio: this.busqueda }});
+      this.$emit('cerrar-dialogo');
+
+    }
+  },
+  data() {
+    return {
+      busqueda : '',
+    }
   },
 };
 </script>

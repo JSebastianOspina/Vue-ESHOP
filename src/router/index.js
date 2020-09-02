@@ -7,6 +7,7 @@ import Carrito from '../components/Carrito.vue'
 import Checkout from '../components/Checkout.vue'
 import Confirmacion from '../components/Confirmacion.vue'
 import PagoMercadoPago from '../components/PagoMercadoPago.vue'
+import BuscarNegocio from '../components/BuscarNegocio.vue'
 
 
 Vue.use(VueRouter)
@@ -16,6 +17,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/buscar/:negocio',
+    name: 'BuscarNegocio',
+    component: BuscarNegocio
   },
   {
     path: '/negocio/:negocio',
