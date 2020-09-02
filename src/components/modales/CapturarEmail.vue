@@ -32,6 +32,12 @@ export default {
   methods: {
     cerrar: function () {
       if (this.emailUsuario != "") {
+        let data = {
+          email : this.emailUsuario
+        }
+        axios.post(this.$store.state.url+'/registrar-visitante',data).then(function(response){
+          console.log(response);
+        });
         this.$emit("cerrar-dialogo");
         //LLamada ajax
       } else {
