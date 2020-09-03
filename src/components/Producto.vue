@@ -73,6 +73,16 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar v-model="snack" timeout="2500" color="success">
+     <v-row no-gutters  justify="center" align-content="center"
+ >
+       <v-col cols="12" class="d-flex justify-center align-center">
+        
+           Producto añadido con éxito
+        
+       </v-col>
+     </v-row>
+    </v-snackbar>
   </v-container>
 </template>
 <script>
@@ -136,6 +146,7 @@ export default {
         color != "Seleccione un color" &&
         talla != "Por favor, seleccione una talla"
       ) {
+        this.snack = true;
         this.$store.commit("addShopping2", {
           tiendaId,
           itemId,
@@ -167,6 +178,8 @@ export default {
       stock: [],
       sera: 0,
       size: [],
+      snack:false,
+      tiempo:2000
     };
   },
 };
