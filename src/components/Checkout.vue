@@ -82,16 +82,12 @@
           required
           flat
           solo
-          hint="Si no tienes uno, deja este campo vacio "
+          hint="Luego de ingresarlo, presiona ENTER. Si no tienes uno, deja este campo vacio. "
           placeholder="Cupon"
           v-model="cupon"
+          @keyup.enter="verifyCupon()"
         ></v-text-field>
-        <v-select
-          solo
-          v-model="metodoPago"
-          :items="['Efectivo','Mercado pago']"
-          label="Método de pago"
-        ></v-select>
+        <v-select solo v-model="metodoPago" :items="['Efectivo','Tarjetas']" label="Método de pago"></v-select>
       </v-form>
       <p style="text-align:right">Total $ {{total}}</p>
       <v-btn
@@ -140,9 +136,24 @@ export default {
       cupon: "",
       metodoPago: "Efectivo",
       total: "",
+      aplico:true
     };
   },
   methods: {
+    verifyCupon() {
+      let local = this;
+
+      axios
+        .get(local.$store.state.url + "/cupon/" + local.cupon)
+        .then(function (response) {
+          if (response.data) {
+            if (local.aplico) {
+              local.total = local.total - 400;
+              local.aplico = false;
+            }
+          }
+        });
+    },
     darTotal() {
       let aux = 0;
       this.$store.state.carrito.forEach((element) => {
@@ -151,7 +162,7 @@ export default {
       this.total = aux;
     },
     payNow() {
-      if (this.$refs.form.validate() || 1 == 1) {
+      if (this.$refs.form.validate()) {
         if (1) {
           console.log("epalarepa");
           let url = this.$store.state.url;
@@ -174,26 +185,20 @@ export default {
           if (this.metodoPago == "Mercado pago") {
             peticion = [this.$store.state.carrito, data];
 
-             axios
-            .post(url + "/requestPaymentMercadoPago", peticion)
-            .then(function (response) {
-              console.log(response);
-              window.location.replace(response.data);
-            }); // Guardamos los datos de proporcionó
-
-
-
-
-          } else{
+            axios
+              .post(url + "/requestPaymentMercadoPago", peticion)
+              .then(function (response) {
+                console.log(response);
+                window.location.replace(response.data);
+              }); // Guardamos los datos de proporcionó
+          } else {
             peticion = [this.$store.state.carrito, data];
-             axios
-            .post(url + "/requestPaymentEfectivo", peticion)
-            .then(function (response) {
-              window.location.replace(response.data);
-            });
-
+            axios
+              .post(url + "/requestPaymentEfectivo", peticion)
+              .then(function (response) {
+                window.location.replace(response.data);
+              });
           }
-         
         }
       }
     },

@@ -73,7 +73,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-snackbar v-model="snack" timeout="2500" color="success">
+    <v-snackbar v-model="snack" timeout="2500" color="#bf383d" elevation="15" shaped="">
      <v-row no-gutters  justify="center" align-content="center"
  >
        <v-col cols="12" class="d-flex justify-center align-center">
