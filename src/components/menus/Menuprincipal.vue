@@ -20,8 +20,8 @@
                 <v-icon color="black">mdi-cart</v-icon>
                 {{darCantidadItems}}
               </v-btn>
-              <v-btn text>
-                <v-icon color="black">mdi-account</v-icon>
+              <v-btn text :to="{ name: 'Informacion'}">
+                <v-icon color="black"  >mdi-account</v-icon>
               </v-btn>
             
             </v-col>
