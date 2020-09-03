@@ -8,6 +8,7 @@ import Checkout from '../components/Checkout.vue'
 import Confirmacion from '../components/Confirmacion.vue'
 import PagoMercadoPago from '../components/PagoMercadoPago.vue'
 import BuscarNegocio from '../components/BuscarNegocio.vue'
+import Informacion from '../components/Informacion.vue'
 
 
 Vue.use(VueRouter)
@@ -52,6 +53,11 @@ Vue.use(VueRouter)
     path: '/Mercadopago',
     name: 'PagoMercadoPago',
     component: PagoMercadoPago
+  },
+  {
+    path: '/Informacion',
+    name: 'Informacion',
+    component: Informacion
   },
  
   

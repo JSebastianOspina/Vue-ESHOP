@@ -98,6 +98,28 @@
         @click="payNow()"
       >{{(metodoPago == "Efectivo") ? "Finalizar compra" : "Proceder a pagina de pago"}}</v-btn>
       <v-btn outlined block color="#eb8f8f" class="py-7 mb-3" @click="$router.go(-1)">Ir atrás</v-btn>
+
+      <v-snackbar v-model="aplico" timeout="2500" color="success" elevation="15" shaped="">
+     <v-row no-gutters  justify="center" align-content="center"
+ >
+       <v-col cols="12" class="d-flex justify-center align-center">
+        
+           Cupon aplicado, descuento 400 
+        
+       </v-col>
+     </v-row>
+    </v-snackbar>
+     <v-snackbar v-model="noaplico" timeout="2500" color="alert" elevation="15" shaped="">
+     <v-row no-gutters  justify="center" align-content="center"
+ >
+       <v-col cols="12" class="d-flex justify-center align-center">
+        
+           Ingresaste un cupon inválido
+        
+       </v-col>
+     </v-row>
+    </v-snackbar>
+
     </v-container>
   </div>
 </template>
@@ -136,7 +158,9 @@ export default {
       cupon: "",
       metodoPago: "Efectivo",
       total: "",
-      aplico:true
+      aplico:false,
+      noaplico:false,
+      yadesconto:false
     };
   },
   methods: {
@@ -147,11 +171,15 @@ export default {
         .get(local.$store.state.url + "/cupon/" + local.cupon)
         .then(function (response) {
           if (response.data) {
-            if (local.aplico) {
+            if (!local.yadesconto) {
               local.total = local.total - 400;
-              local.aplico = false;
+              local.yadesconto = true
+              local.aplico = true;
             }
-          }
+           
+          } else{
+              local.noaplico = true;
+            }
         });
     },
     darTotal() {
@@ -175,7 +203,7 @@ export default {
             codigopostal: this.codigopostal,
             provincia: this.provincia,
             telefono: this.telefono,
-            cupon: this.cupon,
+            cupon: (this.cupon == '') ? 'Sin cupon': this.cupon,
             metodoPago: this.metodoPago,
             total: this.total,
           };
