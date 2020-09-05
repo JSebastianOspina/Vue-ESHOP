@@ -210,7 +210,7 @@ export default {
 
           let peticion = [];
 
-          if (this.metodoPago == "Mercado pago") {
+          if (this.metodoPago == "Tarjetas") {
             peticion = [this.$store.state.carrito, data];
 
             axios
