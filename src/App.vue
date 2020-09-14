@@ -6,6 +6,17 @@
       <router-view />
 
       <CapturarEmail :dialog="dialog" @cerrar-dialogo="ingresoEmail()" />
+      <v-btn
+              fab
+              color="#69C95F"
+              bottom
+              right
+              fixed
+              :href="whatsapp()"
+              target="_blank"
+            >
+              <v-icon color="white">mdi-whatsapp</v-icon>
+            </v-btn>
     </div>
   </v-app>
 </template>
@@ -59,6 +70,9 @@ export default {
       this.dialog = false;
     },
     closeSearch: function () {},
+    whatsapp: function(){
+      return 'https://api.whatsapp.com/send?phone=5493855879712&text=&source=&data=&app_absent='
+    }
   },
 };
 </script>
