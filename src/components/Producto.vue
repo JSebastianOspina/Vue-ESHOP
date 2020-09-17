@@ -158,7 +158,7 @@ export default {
           nombre
         });
       } else {
-        alert("Selecciona");
+        alert("Por favor, selecciona talla y color para poder añadir al carrito.");
       }
     },
       

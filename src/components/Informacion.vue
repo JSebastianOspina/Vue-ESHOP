@@ -25,6 +25,12 @@
       <p>El o los negocios se encargarán de enviarle su pedido</p>
       <h2>Contacto</h2>
       <p>E-mail: feriasemanal2020@gmail.com</p>
+      <h2>Cambios y envío</h2>
+      <p>
+        Para cambiar un producto, se debe comunicar con nosotros y le comunicaremos los pasos a seguir.
+        Los envíos se hacen al día siguiente de la compra, los de comida o bebidas, se hace en el mismo día (hasta el horario dispuesto por las autoridades).
+        Los pedidos a negocios de otras provincias demorarían unos cuantos días.
+      </p>
     </v-container>
   </div>
 </template>

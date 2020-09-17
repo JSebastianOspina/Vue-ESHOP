@@ -16,7 +16,7 @@
               v-if="datos.offert == datos.price"
               class="text-body-1 text-center mt-1 font-weight-light"
             >
-              Desde:
+              
               <strong class>${{datos.price}}</strong>
             </div>
             <div
